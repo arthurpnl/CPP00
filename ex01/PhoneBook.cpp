@@ -77,12 +77,16 @@ void PhoneBook::search_contact(void)
 {
     if (_contactCount == 0)
     {
-        std::cout << "No contacts in phonebook!" << std::endl;
+        std::cout << "No contacts found in the phonebook!" << std::endl;
         return;
     }
     
-    int max = (_contactCount < 8) ? _contactCount : 8;
+    int max;
     int index;
+    if (_contactCount < 8)
+        max = _contactCount;
+    else
+        max = 8;
     
     _displayHeader();
     for (int i = 0; i < max; i++)
@@ -91,13 +95,15 @@ void PhoneBook::search_contact(void)
     std::cout << "---------------------------------------------" << std::endl;
     std::cout << "\nEnter index: ";
     std::cin >> index;
-    std::cin.ignore(10000, '\n');
-    
-    if (index < 0 || index >= max)
+
+        if (index < 0 || index >= max || std::cin.fail())
     {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n'); 
         std::cout << "Invalid index!" << std::endl;
         return;
     }
-    
+
+    std::cin.ignore(10000, '\n');
     _displayContactDetails(index);
 }
