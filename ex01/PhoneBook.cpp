@@ -83,6 +83,8 @@ void PhoneBook::search_contact(void)
     
     int max;
     int index;
+
+    index = -1; 
     if (_contactCount < 8)
         max = _contactCount;
     else
@@ -94,16 +96,30 @@ void PhoneBook::search_contact(void)
 
     std::cout << "---------------------------------------------" << std::endl;
     std::cout << "\nEnter index: ";
-    std::cin >> index;
-
-        if (index < 0 || index >= max || std::cin.fail())
+    
+    if (std::cin.peek() == '\n')
+    {
+        std::cout << "No index entered!" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        return ;
+    }
+    else if (!(std::cin >> index))
+    {
+        std::cout << "Invalid index!" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        return ;
+    }
+    else if (index >= 0 && index < max)
+    {
+        _displayContactDetails(index);
+        std::cin.ignore(10000, '\n');
+    }
+    else
     {
         std::cin.clear();
-        std::cin.ignore(10000, '\n'); 
+        std::cin.ignore(10000, '\n');
         std::cout << "Invalid index!" << std::endl;
-        return;
     }
-
-    std::cin.ignore(10000, '\n');
-    _displayContactDetails(index);
 }

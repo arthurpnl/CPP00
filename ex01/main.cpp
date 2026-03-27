@@ -4,6 +4,7 @@
 int main(void)
 {
     PhoneBook phonebook;
+    PhoneBook phonebook2;
     std::string command;
     
     std::cout << "=== MY AWESOME PHONEBOOK ===" << std::endl;
