@@ -97,7 +97,7 @@ void PhoneBook::search_contact(void)
     std::cout << "---------------------------------------------" << std::endl;
     std::cout << "\nEnter index: ";
     
-    if (std::cin.peek() == '\n')
+    if (std::cin.peek() == '\n' || std::cin.peek() == ' ')
     {
         std::cout << "No index entered!" << std::endl;
         std::cin.clear();
